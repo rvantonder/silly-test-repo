@@ -11,8 +11,9 @@ jobs:
         # https://developer.github.com/v3/pulls/comments/#parameters-2
         with:
           route: POST /repos/:repository/pulls/:pull_number/comments
+          pull_number: ${{ github.event.number }}
           repository: ${{ github.repository }}
-          mediaType: |
+          mediaType: | # The | is significant!
             previews: 
               - comfort-fade
           body: Test comment
