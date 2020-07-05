@@ -1,0 +1,13 @@
+name: Comby
+on: [push, pull_request]
+jobs:
+  build:
+    name: Comby test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run comby
+        uses: comby-tools/comby-action@master
+        with:
+          match_template: main() {:[body]}
+          rewrite_template: main() {}
