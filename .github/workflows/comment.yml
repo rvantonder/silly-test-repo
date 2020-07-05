@@ -10,8 +10,7 @@ jobs:
         id: create_multiline_comment
         # https://developer.github.com/v3/pulls/comments/#parameters-2
         with:
-          route: POST /repos/:repository/pulls/:pull_number/comments
-          pull_number: ${{ github.event.number }}
+          route: POST /repos/:repository/pulls/1/comments
           repository: ${{ github.repository }}
           mediaType: | # The | is significant!
             previews: 
