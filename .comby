@@ -1,0 +1,5 @@
+flags='-lang .go'
+
+[rule]
+match='foo(:[1])'
+rewrite='bar(:[1])'
