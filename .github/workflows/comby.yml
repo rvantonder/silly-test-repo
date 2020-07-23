@@ -8,6 +8,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run comby
         uses: comby-tools/comby-action@master
-        with:
-          match_template: main() {:[body]}
-          rewrite_template: main() {}
+      - name: Run PR commenter
+        uses: rvantonder/patch-to-pr-comment-action@master
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_HEAD_SHA: ${{github.event.pull_request.head.sha}}
+
