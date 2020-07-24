@@ -6,11 +6,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Run file extractor
+        uses: rvantonder/pr-files-action@master
+        env:
+            PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - name: Run comby
         uses: comby-tools/comby-action@master
       - name: Run PR commenter
         uses: rvantonder/patch-to-pr-comment-action@master
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_HEAD_SHA: ${{github.event.pull_request.head.sha}}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
