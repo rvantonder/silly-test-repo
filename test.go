@@ -2,6 +2,6 @@ func main() {
    foo(bar, baz)
 }
 
-func search() {
+func replace() {
    ...
 }
