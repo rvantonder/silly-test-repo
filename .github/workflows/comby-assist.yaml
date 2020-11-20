@@ -1,0 +1,32 @@
+name: comby-assist
+on: pull_request
+jobs:
+  comby:
+    # Check if the PR is not raised by this workflow and is not from a fork
+    if: startsWith(github.head_ref, 'comby-assist-patches') == false && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: run comby
+        id: comby
+        uses: comby-tools/comby-action@comby-assist
+        # FIXME        
+        with:
+          args: 'search' 'replace' .go -in-place
+      - name: Set comby-assist branch name
+        id: vars
+        run: echo ::set-output name=branch-name::"comby-assist-patches/${{ github.head_ref }}"
+      - name: Create Pull Request
+        if: steps.comby.outputs.exit-code == 0
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: comby-assist action fixes
+          title: Fixes by comby-assist action
+          body: Description, TODO.
+          labels: autofix
+          branch: ${{ steps.vars.outputs.branch-name }}
+      - name: Fail if comby-assist made changes
+        if: steps.comby.outputs.exit-code == 0
+        run: exit 1
