@@ -1,7 +1,7 @@
 name: comby-assist
 on: pull_request
 jobs:
-  comby:
+  comby-assist:
     # Check if the PR is not raised by this workflow and is not from a fork
     if: startsWith(github.head_ref, 'comby-assist-patches') == false && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
