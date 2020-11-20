@@ -1,3 +1,3 @@
 func main() {
-   foo(bar, baz)
+   bar(bar, baz)
 }
