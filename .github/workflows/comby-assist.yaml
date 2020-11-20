@@ -14,7 +14,7 @@ jobs:
         uses: comby-tools/comby-action@comby-assist
         # FIXME        
         with:
-          args: 'search' 'replace' .go -in-place
+          args: search replace .go -in-place
       - name: Set comby-assist branch name
         id: vars
         run: echo ::set-output name=branch-name::"comby-assist-patches/${{ github.head_ref }}"
